@@ -250,14 +250,16 @@
             <div class="card">
               <!--Card image-->
               <div class="view overlay">
+              <a href="{{item.get_absolute_url}}">
                 <img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg" class="card-img-top"
                   alt="">
-                <a>
+                
                   <div class="mask rgba-white-slight"></div>
                 </a>
               </div>
               <!--Card image-->
               <!--Card content-->
+             
               <div class="card-body text-center">
                 <!--Category & Title-->
                 <a href="" class="grey-text">
@@ -271,10 +273,14 @@
                   </strong>
                 </h5>
                 <h4 class="font-weight-bold blue-text">
-                  <strong>120$</strong>
+                {% if item.discount_price %}
+                    {{item.discount_price}}
+                  {% else %}
+                    {{ item.price }}
+                  {% endif %}
                 </h4>
-
               </div>
+  
               <!--Card content-->
 
             </div>
