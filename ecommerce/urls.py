@@ -1,8 +1,12 @@
-from django.conf.urls import url
-from .views import home
+from django.urls import path
+from .views import (
+    HomeView,
+    ItemDetailView
+)
 
 app_name ='ecommerce'
 
 urlpatterns = [
-    url('',home, name='home')
+    path('',HomeView.as_view(), name='home'),
+    path('product/<slug>/', ItemDetailView.as_view(), name='product')
 ]
