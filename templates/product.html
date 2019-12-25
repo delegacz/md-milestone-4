@@ -1,3 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,9 +17,7 @@
   <!-- Your custom styles (optional) -->
   <link href="css/style.min.css" rel="stylesheet">
 </head>
-
 <body>
-
   <!-- Navbar -->
   <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container">
@@ -129,10 +129,8 @@
 
             <p class="lead font-weight-bold">Description</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dolor suscipit libero eos atque quia ipsa
-              sint voluptatibus!
-              Beatae sit assumenda asperiores iure at maxime atque repellendus maiores quia sapiente.</p>
-
+            <p>{{ object.description }}</p>
+{% comment %}
             <form class="d-flex justify-content-left">
               <!-- Default input -->
               <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
@@ -140,9 +138,12 @@
                 <i class="fas fa-shopping-cart ml-1"></i>
               </button>
 
-            </form>
-
-          </div>
+            </form>{% endcomment %}
+            <a href="{{ object.get_add_to_cart_url }}" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+          </a>
           <!--Content-->
 
         </div>
@@ -285,5 +286,5 @@
 
   </script>
 </body>
-
+{% endblock content %}
 </html>
