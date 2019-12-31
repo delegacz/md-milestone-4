@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
+
+
     'ecommerce'
 ]
 
@@ -140,3 +143,6 @@ STATICFILES_DIRS = (
 )
 
 SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+#Crispy Forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
