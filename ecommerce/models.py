@@ -1,10 +1,11 @@
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
+from django_countries.fields import CountryField
 
 CATEGORY_CHOICES = {
-    ('S', 'Synch'),
-    ('SP','Speaker'),
+    ('S', 'Sneakers'),
+    ('OW','Outwear'),
     ('A', 'Accesories')
 }
 LABEL_CHOICES = {
@@ -12,6 +13,11 @@ LABEL_CHOICES = {
     ('S','secondary'),
     ('D', 'danger')
 }
+ADDRESS_CHOICES = (
+    ('B', 'Billing'),
+    ('S', 'Shipping'),
+)
+
 # Create your models here.
 class Item(models.Model):
     title = models.CharField(max_length=100)
@@ -39,7 +45,6 @@ class Item(models.Model):
         return reverse("ecommerce:remove-from-cart", kwargs={
             'slug': self.slug
         })
-    
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
@@ -72,10 +77,26 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
     def get_total(self):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+
+class Address(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    street_address = models.CharField(max_length=100)
+    apartment_address = models.CharField(max_length=100)
+    country = CountryField(multiple=False)
+    zip = models.CharField(max_length=100)
+    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
+    default = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name_plural = 'Addresses'

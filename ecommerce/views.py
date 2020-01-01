@@ -4,10 +4,23 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View 
-from .models import Item, Order, OrderItem
+from .models import Item, OrderItem, Order 
 from django.shortcuts import redirect
 from django.utils import timezone
 # Create your views here.
+
+import random
+import string
+
+def create_ref_code():
+    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+
+def is_valid_form(values):
+    valid = True
+    for field in values:
+        if field == '':
+            valid = False
+    return valid
 
 
 class HomeView(ListView):
