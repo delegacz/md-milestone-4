@@ -3,5 +3,7 @@ Used code
 - [Template](https://mdbootstrap.com/freebies/jquery/e-commerce/)
 App description
 - [Crispy Forms](#)
+- [django countries](#)
+- [bootstrap4](#)
 main - project configuration
 ecommerce - products managment
