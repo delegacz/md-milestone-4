@@ -5,5 +5,6 @@ App description
 - [Crispy Forms](#)
 - [django countries](#)
 - [bootstrap4](#)
+- [Pillow](#)
 main - project configuration
 ecommerce - products managment

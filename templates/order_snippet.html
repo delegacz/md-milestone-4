@@ -27,7 +27,7 @@
         <strong>${{ order.get_total }}</strong>
     </li>
     </ul>
-
+{% comment %}
     {% if DISPLAY_COUPON_FORM %}
     <form class="card p-2" action="{% url 'core:add-coupon' %}" method="POST">
         {% csrf_token %}
@@ -39,5 +39,6 @@
         </div>
     </form>
     {% endif %}
+    {% endcomment %}
 
 </div>
