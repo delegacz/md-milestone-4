@@ -8,8 +8,8 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm
-from .models import Item, OrderItem, Order, Address, UserProfile, Payment
-# Create your views here.
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, UserProfile
+
 import random
 import string
 import stripe
@@ -31,7 +31,7 @@ def is_valid_form(values):
         if field == '':
             valid = False
     return valid
-
+    
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
@@ -39,7 +39,7 @@ class CheckoutView(View):
             form = CheckoutForm()
             context = {
                 'form': form,
-                
+                'couponform': CouponForm(),
                 'order': order,
                 'DISPLAY_COUPON_FORM': True
             }
@@ -416,6 +416,7 @@ def remove_from_cart(request, slug):
 
 @login_required
 def remove_single_item_from_cart(request, slug):
+    
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(
         user=request.user,
@@ -442,4 +443,28 @@ def remove_single_item_from_cart(request, slug):
             return redirect("ecommerce:product", slug=slug)
     else:
         messages.info(request, "You do not have an active order")
-        return redirect("ecommerce:product", slug=slug)
+        return redirect("ecommerce:product", s=slug)
+
+def get_coupon(request, code):
+    try:
+        coupon = Coupon.objects.get(code=code)
+        return coupon
+    except ObjectDoesNotExist:
+        messages.info(request, "This coupon does not exist")
+        return redirect("ecommerce:checkout")
+
+class AddCouponView(View):
+    def post(self, *args, **kwargs):
+        form = CouponForm(self.request.POST or None)
+        if form.is_valid():
+            try:
+                code = form.cleaned_data.get('code')
+                order = Order.objects.get(
+                    user=self.request.user, ordered=False)
+                order.coupon = get_coupon(self.request, code)
+                order.save()
+                messages.success(self.request, "Successfully added coupon")
+                return redirect("ecommerce:checkout")
+            except ObjectDoesNotExist:
+                messages.info(self.request, "You do not have an active order")
+                return redirect("ecommerce:checkout")

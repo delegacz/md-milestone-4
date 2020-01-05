@@ -28,7 +28,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-# Create your models here.
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
@@ -95,6 +94,8 @@ class Order(models.Model):
         'Address', related_name='billing_address', on_delete=models.SET_NULL, blank=True, null=True)
     payment = models.ForeignKey(
         'Payment', on_delete=models.SET_NULL, blank=True, null=True)
+    coupon = models.ForeignKey(
+        'Coupon', on_delete=models.SET_NULL, blank=True, null=True)
     being_delivered = models.BooleanField(default=False)
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
@@ -118,6 +119,8 @@ class Order(models.Model):
         total = 0
         for order_item in self.items.all():
             total += order_item.get_final_price()
+        if self.coupon:
+            total -= self.coupon.amount
         return total
 
 class Address(models.Model):
@@ -138,7 +141,6 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = 'Addresses'
 
-
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -148,6 +150,13 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class Coupon(models.Model):
+    code = models.CharField(max_length=15)
+    amount = models.FloatField()
+
+    def __str__(self):
+        return self.code
 
 def userprofile_receiver(sender, instance, created, *args, **kwargs):
     if created:
