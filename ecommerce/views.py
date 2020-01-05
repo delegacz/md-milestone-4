@@ -10,7 +10,6 @@ from django.utils import timezone
 from .forms import CheckoutForm
 from .models import Item, OrderItem, Order, Address, UserProfile, Payment
 # Create your views here.
-
 import random
 import string
 import stripe
@@ -25,7 +24,6 @@ def products(request):
         'items': Item.objects.all()
     }
     return render(request, "products.html", context)
-
 
 def is_valid_form(values):
     valid = True
@@ -357,11 +355,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
 
-
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product.html"
-
 
 @login_required
 def add_to_cart(request, slug):
@@ -392,7 +388,6 @@ def add_to_cart(request, slug):
         messages.info(request, "This item was added to your cart.")
         return redirect("ecommerce:order-summary")
 
-
 @login_required
 def remove_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
@@ -418,7 +413,6 @@ def remove_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order")
         return redirect("ecommerce:product", slug=slug)
-
 
 @login_required
 def remove_single_item_from_cart(request, slug):
@@ -449,4 +443,3 @@ def remove_single_item_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order")
         return redirect("ecommerce:product", slug=slug)
-

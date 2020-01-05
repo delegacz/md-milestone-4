@@ -1,4 +1,6 @@
+from django.conf.urls import static
 from django.urls import path
+
 from .views import (
     HomeView,
     ItemDetailView,
