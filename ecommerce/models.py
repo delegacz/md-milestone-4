@@ -1,3 +1,4 @@
+from django.db.models.signals import post_save
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
@@ -36,6 +37,7 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES,max_length=1)
     slug = models.SlugField()
     description = models.TextField()
+    image = models.ImageField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -146,3 +148,9 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.user.username
+
+def userprofile_receiver(sender, instance, created, *args, **kwargs):
+    if created:
+        userprofile = UserProfile.objects.create(user=instance)
+
+post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)
