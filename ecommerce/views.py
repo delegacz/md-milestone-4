@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import CheckoutForm
+from .forms import CheckoutForm, CouponForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, UserProfile
 
 import random
@@ -31,7 +31,7 @@ def is_valid_form(values):
         if field == '':
             valid = False
     return valid
-    
+
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
