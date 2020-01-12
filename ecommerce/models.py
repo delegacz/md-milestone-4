@@ -1,23 +1,28 @@
 from django.db.models.signals import post_save
 from django.conf import settings
 from django.db import models
+from django.db.models import Sum
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
-CATEGORY_CHOICES = {
-    ('S', 'Sneakers'),
-    ('OW','Outwear'),
-    ('A', 'Accesories')
-}
-LABEL_CHOICES = {
+
+CATEGORY_CHOICES = (
+    ('S', 'Shirt'),
+    ('SW', 'Sport wear'),
+    ('OW', 'Outwear')
+)
+
+LABEL_CHOICES = (
     ('P', 'primary'),
-    ('S','secondary'),
+    ('S', 'secondary'),
     ('D', 'danger')
-}
+)
+
 ADDRESS_CHOICES = (
     ('B', 'Billing'),
     ('S', 'Shipping'),
 )
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -28,15 +33,16 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.FloatField()
     discount_price = models.FloatField(blank=True, null=True)
     category = models.CharField(choices=CATEGORY_CHOICES, max_length=2)
-    label = models.CharField(choices=LABEL_CHOICES,max_length=1)
+    label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
-    image = models.ImageField(blank=True, null=True)
+    image = models.ImageField()
 
     def __str__(self):
         return self.title
@@ -55,6 +61,7 @@ class Item(models.Model):
         return reverse("ecommerce:remove-from-cart", kwargs={
             'slug': self.slug
         })
+
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -79,6 +86,7 @@ class OrderItem(models.Model):
         if self.item.discount_price:
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
+
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -123,9 +131,8 @@ class Order(models.Model):
             total -= self.coupon.amount
         return total
 
-class Address(models.Model):
 
-    
+class Address(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     street_address = models.CharField(max_length=100)
@@ -141,6 +148,7 @@ class Address(models.Model):
     class Meta:
         verbose_name_plural = 'Addresses'
 
+
 class Payment(models.Model):
     stripe_charge_id = models.CharField(max_length=50)
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -151,6 +159,7 @@ class Payment(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class Coupon(models.Model):
     code = models.CharField(max_length=15)
     amount = models.FloatField()
@@ -158,8 +167,20 @@ class Coupon(models.Model):
     def __str__(self):
         return self.code
 
+
+class Refund(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    reason = models.TextField()
+    accepted = models.BooleanField(default=False)
+    email = models.EmailField()
+
+    def __str__(self):
+        return f"{self.pk}"
+
+
 def userprofile_receiver(sender, instance, created, *args, **kwargs):
     if created:
         userprofile = UserProfile.objects.create(user=instance)
+
 
 post_save.connect(userprofile_receiver, sender=settings.AUTH_USER_MODEL)

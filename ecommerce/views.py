@@ -7,17 +7,18 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import CheckoutForm, CouponForm, PaymentForm
-from .models import Item, OrderItem, Order, Address, Payment, Coupon, UserProfile
+from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
+from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
 
 import random
 import string
 import stripe
-
 stripe.api_key = settings.STRIPE_SECRET_KEY
+
 
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
+
 
 def products(request):
     context = {
@@ -25,12 +26,14 @@ def products(request):
     }
     return render(request, "products.html", context)
 
+
 def is_valid_form(values):
     valid = True
     for field in values:
         if field == '':
             valid = False
     return valid
+
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
@@ -201,6 +204,7 @@ class CheckoutView(View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("ecommerce:order-summary")
 
+
 class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
@@ -338,10 +342,12 @@ class PaymentView(View):
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
 
+
 class HomeView(ListView):
     model = Item
-    paginate_by = 8
+    paginate_by = 10
     template_name = "home.html"
+
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
@@ -355,9 +361,11 @@ class OrderSummaryView(LoginRequiredMixin, View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
 
+
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product.html"
+
 
 @login_required
 def add_to_cart(request, slug):
@@ -388,6 +396,7 @@ def add_to_cart(request, slug):
         messages.info(request, "This item was added to your cart.")
         return redirect("ecommerce:order-summary")
 
+
 @login_required
 def remove_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
@@ -414,9 +423,9 @@ def remove_from_cart(request, slug):
         messages.info(request, "You do not have an active order")
         return redirect("ecommerce:product", slug=slug)
 
+
 @login_required
 def remove_single_item_from_cart(request, slug):
-    
     item = get_object_or_404(Item, slug=slug)
     order_qs = Order.objects.filter(
         user=request.user,
@@ -443,7 +452,8 @@ def remove_single_item_from_cart(request, slug):
             return redirect("ecommerce:product", slug=slug)
     else:
         messages.info(request, "You do not have an active order")
-        return redirect("ecommerce:product", s=slug)
+        return redirect("ecommerce:product", slug=slug)
+
 
 def get_coupon(request, code):
     try:
@@ -452,6 +462,7 @@ def get_coupon(request, code):
     except ObjectDoesNotExist:
         messages.info(request, "This coupon does not exist")
         return redirect("ecommerce:checkout")
+
 
 class AddCouponView(View):
     def post(self, *args, **kwargs):
@@ -468,3 +479,38 @@ class AddCouponView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "You do not have an active order")
                 return redirect("ecommerce:checkout")
+
+
+class RequestRefundView(View):
+    def get(self, *args, **kwargs):
+        form = RefundForm()
+        context = {
+            'form': form
+        }
+        return render(self.request, "request_refund.html", context)
+
+    def post(self, *args, **kwargs):
+        form = RefundForm(self.request.POST)
+        if form.is_valid():
+            ref_code = form.cleaned_data.get('ref_code')
+            message = form.cleaned_data.get('message')
+            email = form.cleaned_data.get('email')
+            # edit the order
+            try:
+                order = Order.objects.get(ref_code=ref_code)
+                order.refund_requested = True
+                order.save()
+
+                # store the refund
+                refund = Refund()
+                refund.order = order
+                refund.reason = message
+                refund.email = email
+                refund.save()
+
+                messages.info(self.request, "Your request was received.")
+                return redirect("ecommerce:request-refund")
+
+            except ObjectDoesNotExist:
+                messages.info(self.request, "This order does not exist.")
+                return redirect("ecommerce:request-refund")

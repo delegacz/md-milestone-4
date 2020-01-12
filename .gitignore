@@ -2,3 +2,4 @@
 __app.py
 media_root
 env.py
+/templates/old
