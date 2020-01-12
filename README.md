@@ -8,3 +8,4 @@ App description
 - [Pillow](#)
 main - project configuration
 ecommerce - products managment
+[![Build Status](https://travis-ci.org/delegacz/md-milestone-4.svg?branch=master)](https://travis-ci.org/delegacz/md-milestone-4)
