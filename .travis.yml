@@ -2,5 +2,9 @@ language: python
 python:
 - "3.7.3"
 install: "pip install -r requirements.txt"
+env:
+  global:
+    - secure: "q6v4w5DV7gmx//pVDXy6LhmueKlRlV2myOXYDF5kGJ9hhHRc12MFwAyGSD3BUqve0j/lgY7EnPthx/jkKpYo5PQ/cVzuS1SHJraxVs8J2OT6bP8HQD5HWJw8Cmr0JLq47OUvIS9rOIaFLmzEvrMZr+rZ/tZE8lhGOQj00l9Kclkk0U71Vi+2wTQMkAmQ4/4J+zYLJrc8DEQUuW52QY/XcN58ZD0jYUxOkD5Qs/DGm9p4tmwrJT3+EL4xAwOuvMHp0bUs9+mZTMQNlNRwtxpLuXnzSixAS7PGyNFKax0fkhEpIhmFm7ymvZIMGngMhiq/vzH1WyPJ4Hz/g+MxaH+GB9PNe4w43cEZ+8Owm1rmXcKeeIYkGWMXDbClvZerCYYHF51svBB+hJ5q8+k8LwcuZ9P2beqzrCe6JeuIIYTP/vh7zsoO6wpTU3sCF75d1BD1KxOdbXisoO1bxyRW/vuXB4qYUkiyiraEnxA2l/L6moWbfNqhDEyaVFSuCx1WtX25bJptW5PG/bzZ64aK9Eujh++sh6VFIYMGWTIuacEded2AI489nuGEIgj14Fw5tx386pQm9bcA+WG/Xkr1isgyEPatDZyxoGBC9yJAlZ9BOExIBR/a4fgHY1YWjX+P23Z3mtoGDAiQan4tVeR+6MQRtydaObOQ5Jm3jAWoecMcWEk="
 script:
-- SECRET_KET="DJANGO_SECRET_KEY" ./manage.py test
+- export SECRET_KET=$SECRET_KEY
+- python ./manage.py test
