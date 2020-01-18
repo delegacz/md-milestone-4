@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, Coupon, Refund, UserProfile
-
+from .filters import ProductFilter
 import random
 import string
 import stripe
@@ -347,7 +347,11 @@ class HomeView(ListView):
     model = Item
     paginate_by = 10
     template_name = "home.html"
-
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
+        return context 
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):

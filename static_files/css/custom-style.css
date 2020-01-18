@@ -1,0 +1,37 @@
+:root {
+    --brand-passive-color: #000;
+    --brand-active-color: #FFD600;
+    --sale-color: #ff0020;
+}
+.card {
+    text-align: left;
+}
+.category-name {
+    font-size: 10px;
+}
+.badge {
+    font-weight: 400;
+    padding: 5px 10px;
+}
+.new-color {
+    box-shadow: none;
+    background: var(--brand-active-color);
+}
+.sale-color {
+    background: var(--sale-color);
+    box-shadow: none;
+}
+form #div_id_title label {
+    display: none;
+}
+form #div_id_title,
+form #div_id_category,
+form #div_id_category label,
+form #div_id_category div,
+form #div_id_category #id_category,
+form .nav-link {
+    display: inline-block;
+}
+#product-filter-from {
+    padding: 10px 20px 0px 0px;
+}
