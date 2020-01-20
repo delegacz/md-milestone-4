@@ -1,6 +1,6 @@
 import os
 import os.path
-#import env
+import env
 import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -35,7 +35,9 @@ INSTALLED_APPS = [
     'django_countries',
     'debug_toolbar',
     'storages',
-
+    'product_reviews',
+    'coupons',
+    'refunds',
     'ecommerce'
 ]
 

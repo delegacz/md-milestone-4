@@ -8,10 +8,9 @@ from .views import (
     remove_from_cart,
     remove_single_item_from_cart,
     PaymentView,
-    AddCouponView,
-    RequestRefundView
 )
-
+from coupons.views import AddCouponView
+from refunds.views import RequestRefundView
 app_name = 'ecommerce'
 
 urlpatterns = [
