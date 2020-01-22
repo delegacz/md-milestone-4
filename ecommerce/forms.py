@@ -32,9 +32,8 @@ class CheckoutForm(forms.Form):
     use_default_shipping = forms.BooleanField(required=False)
     set_default_billing = forms.BooleanField(required=False)
     use_default_billing = forms.BooleanField(required=False)
-
-    payment_option = forms.ChoiceField(
-        widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+    
+    payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
 class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)

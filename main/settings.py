@@ -70,7 +70,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
-
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 def show_toolbar(request):
     return True
 
