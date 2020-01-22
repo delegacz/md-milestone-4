@@ -11,7 +11,6 @@ from .forms import CheckoutForm, CouponForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, UserProfile
 from coupons.models import Coupon
 from refunds.models import Refund
-
 from .filters import ProductFilter
 import random
 import string
@@ -22,13 +21,11 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 def create_ref_code():
     return ''.join(random.choices(string.ascii_lowercase + string.digits, k=20))
 
-
 def products(request):
     context = {
         'items': Item.objects.all()
     }
     return render(request, "products.html", context)
-
 
 def is_valid_form(values):
     valid = True
@@ -36,7 +33,6 @@ def is_valid_form(values):
         if field == '':
             valid = False
     return valid
-
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
@@ -207,7 +203,6 @@ class CheckoutView(View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("ecommerce:order-summary")
 
-
 class PaymentView(View):
     def get(self, *args, **kwargs):
         order = Order.objects.get(user=self.request.user, ordered=False)
@@ -345,7 +340,6 @@ class PaymentView(View):
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
 
-
 class HomeView(ListView):
     model = Item
     paginate_by = 10
@@ -368,11 +362,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
             messages.warning(self.request, "You do not have an active order")
             return redirect("/")
 
-
 class ItemDetailView(DetailView):
     model = Item
-    template_name = "product.html"
-
+    template_name = "product.html" 
 
 @login_required
 def add_to_cart(request, slug):
@@ -403,7 +395,6 @@ def add_to_cart(request, slug):
         messages.info(request, "This item was added to your cart.")
         return redirect("ecommerce:order-summary")
 
-
 @login_required
 def remove_from_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
@@ -429,7 +420,6 @@ def remove_from_cart(request, slug):
     else:
         messages.info(request, "You do not have an active order")
         return redirect("ecommerce:product", slug=slug)
-
 
 @login_required
 def remove_single_item_from_cart(request, slug):

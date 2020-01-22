@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Refund, Address, UserProfile
+from .models import Item, OrderItem, Order, Payment, Address, UserProfile
 from coupons.models import Coupon
-
+from refunds.models import Refund
 def make_refund_accepted(modeladmin, request, queryset):
     queryset.update(refund_requested=False, refund_granted=True)
 
