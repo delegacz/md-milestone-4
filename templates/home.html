@@ -2,7 +2,19 @@
 {% block content %}
   <main>
     <div class="container">
+      <div class="container promo-banner">
+        <div class="banner-content ">
+          <h1>Nike Air Max 1</h1>
+          <p>Old Classic back at it</p>
+          <button class="btn promo-btn">
+            <a href="#">Shop Now</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="container">
       {% include "product_filter_bar.html" %}
+      <h4>Products:</h4>
       {% include "product_grid.html" %}
     </div>
   </main>
