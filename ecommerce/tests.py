@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from .forms import CheckoutForm, PaymentForm
 from coupons.forms import CouponForm
 from refunds.forms import RefundForm
-from coupons.forms import CouponForm+
+from coupons.forms import CouponForm
 from django_countries import fields, countries, data
 from django_countries.fields import CountryField
 from django_countries.tests import forms, custom_countries
