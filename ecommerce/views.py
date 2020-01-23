@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -11,6 +12,7 @@ from .forms import CheckoutForm, CouponForm, PaymentForm
 from .models import Item, OrderItem, Order, Address, Payment, UserProfile
 from coupons.models import Coupon
 from refunds.models import Refund
+from . import filters
 from .filters import ProductFilter
 import random
 import string
@@ -23,7 +25,7 @@ def create_ref_code():
 
 def products(request):
     context = {
-        'items': Item.objects.all()
+        'items': Item.objects.all().order_by('id')
     }
     return render(request, "products.html", context)
 
@@ -340,15 +342,32 @@ class PaymentView(View):
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
 
-class HomeView(ListView):
-    model = Item
-    paginate_by = 10
-    template_name = "home.html"
+
+
+def product_grid_view(request):
+
+    item_list = Item.objects.all().order_by('id')
+    item_filter = ProductFilter(request.GET, queryset=item_list)
+    paginator = Paginator(item_filter.qs, 8)
+    page = request.GET.get('page')
+ 
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = ProductFilter(self.request.GET, queryset=self.get_queryset())
-        return context 
+    try:
+        response = paginator.page(page)
+    except PageNotAnInteger:
+        response = paginator.page(1)
+    except EmptyPage:
+        response = paginator.page(paginator.num_pages)
+        
+    return render(request,'home.html',{
+                'title':'home',
+                'response':response,
+                'paginator':paginator,
+                'page':page,
+                'filter':item_filter,
+                }
+            
+        ) 
 
 class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):

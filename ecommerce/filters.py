@@ -5,7 +5,6 @@ from .models import Item
 
 class ProductFilter(django_filters.FilterSet):
     
-
     title = CharFilter(field_name="title",lookup_expr="icontains", widget=TextInput(attrs={'placeholder':'Search'}))
        
     class Meta:

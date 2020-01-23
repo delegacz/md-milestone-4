@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     ItemDetailView,
     CheckoutView,
-    HomeView,
+    product_grid_view,
     OrderSummaryView,
     add_to_cart,
     remove_from_cart,
@@ -14,7 +14,7 @@ from refunds.views import RequestRefundView
 app_name = 'ecommerce'
 
 urlpatterns = [
-    path('', HomeView.as_view(), name='home'),
+    path('', product_grid_view, name='home'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(),  name='product'),
