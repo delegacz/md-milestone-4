@@ -126,12 +126,6 @@ class TestHomeView(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_pagination_works(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('is_paginated' in response.context)
-        self.assertTrue(response.context['is_paginated'] == True)
-
 class TestItemDetailView(TestCase):
     @classmethod
     def setUpTestData(cls):

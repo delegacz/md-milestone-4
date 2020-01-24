@@ -3,68 +3,77 @@
 
 [Visit Live Project](https://md-milestone-project-4.herokuapp.com/)
 
-STR:WER is a ecommerce shop for all things street wear, manualy picked inventory of the most desirables items from the world of street wear.
+STR:WER is a ecommerce shop for all things street wear, manualy picked inventory of the most desirables items from the world of street wear. 
 
 Use code: 123ABC for 100$ OFF
  
 ## UX
- 
-Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
+### Who is this website for?
+This website is aimed at people who are interested in a street wear culture and would like to purchase clouthing articles(Sneakers, and Outdoor/Outer Cloathing)
 
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
+### What does it fulfill?
+This website fulfills the need of users to discover and purchase products by providing a range of products and an ability to order and pay for them
 
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
+### User Stories 
+
+- As a user , I want add product to the cart , so that I can purchase it.
+- As a user, I want to fill an refund form, so that I can revice refund for returned product
+- As a user, I want to sing up, so that I can make a purchase
+- As a user, I want to search through products, so that I cant find a jacket I want
+
 
 ## Features
 
-In this section, you should go over the different parts of your project, and describe each in a sentence or so.
  
 ### Existing Features
 - Refunds - allows customer to request a refund by providing ref code and submitting a form
 - Coupon Codes  - allows users to lower the price of the order by using code at checkout
-- Users Reviews - allows users to leave a review under a product
+- Pagination - allows user to browse through products by changing displayed page
+- Add to Cart - Allows users to add an item to the cart for later checkout, cart page also gives user an opportunity to modify quantity of the product or remove it before progressing to checkout
+- Stripe Integration - Allows users to pay for thier order using Stripe
+- Order Summary - Allows users to see an detailed view at thier order on checkout page and apply coupon code for a discount 
 
 
 ### Features Left to Implement
-- Another feature idea
+- Size Selector
+- Gender Selector
+- More product Categories
+- Product Reviews
+- Advanced product Gallery
+
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
-
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
-- [Stripe](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Django](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Python](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+- [Stripe](https://stripe.com/)
+    - The project uses **Stripe** for credit/debit cart processing and payment gateway
+- [Django](https://www.djangoproject.com/)
+    - The project uses **Django** as python web framework
+- [Python](https://www.python.org/)
+    - The project uses **Python** as a main programic language
 - [AllAuth](https://django-allauth.readthedocs.io/en/latest/installation.html)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Crispy Forms](#)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [django countries](#)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Pillow](#)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Bootstrap](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [JavaScript](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Git](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [GitHub](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Heroku](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Amazon Web Services - AWS](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [StackOverflow](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
-- [Travis CI](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+    - The project uses **AllAuth** to provide ability to Sign in/ Log In for users
+- [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+    - The project uses **Crispy Forms** to simplify styling of django generated forms
+- [django countries](https://pypi.org/project/django-countries/)
+    - The project uses **Django Countries** to provice Country choice field in the forms
+- [Pillow](https://pillow.readthedocs.io/en/stable/)
+    - The project uses **Pillow** as python Imaging Library
+- [Bootstrap](https://getbootstrap.com/)
+    - The project uses **Bootstrap** to simplify and streamline template creation process
+- [JavaScript](https://www.javascript.com/)
+    - The project uses **JavaScript** for DOM manipulation and Stripe integration
+- [Git](https://git-scm.com)
+    - The project uses **GIT** for version controll and backup
+- [GitHub](https://github.com)
+    - The project uses **Github** for remote repository storage and commit log
+- [Heroku](https://www.heroku.com/home)
+    - The project uses **Heroku** as a deployment platform and hosting
+- [Amazon Web Services - AWS](https://aws.amazon.com)
+    - The project uses **AWS** for image/file storage
+- [Travis CI](https://travis-ci.org)
+    - The project uses **Travis CI** for continuous integration
 
 ## Testing
 
@@ -80,7 +89,7 @@ For any scenarios that have not been automated, test the user stories manually a
     3. Try to submit the form with an invalid email address and verify that a relevant error message appears
     4. Try to submit the form with all inputs valid and verify that a success message appears.
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+In addition, you should mention in this section how your project loo ks and works on different browsers and screen sizes.
 
 You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
@@ -101,10 +110,18 @@ Once code was functional it was deployed to [Heroku](https://www.heroku.com/)
 6. Clone the repository:<br> `$ git:clone -a appname`<br>`$cd appname`
 7. Deploy the repository:<br>`git add .`<br>`git commit -am "message"`<br>`git push heroku master`
 
+## Resources Used 
+- Free code Academy django tutorial
+- Stack overflow threads
+- Django Documentation
+- django filter documentation
+- md5 template
+- 
+
 ## Credits
 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+- All products, Images, Product description are from [Nike Store](https://www.nike.com)
 
 ### Media
 - All the product photos are from nike.com and are used for educational purposes only, Nike and Nike Swoosh are registered trademaks belonging to Nike

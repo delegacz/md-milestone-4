@@ -3,10 +3,10 @@ from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 from coupons.forms import CouponForm
 from refunds.forms import RefundForm
-PAYMENT_CHOICES = (
-    ('S', 'Stripe'),
-    ('P', 'PayPal')
-)
+#PAYMENT_CHOICES = (
+#    ('S', 'Stripe'),
+#    ('P', 'PayPal')
+#)
 
 class CheckoutForm(forms.Form):
     shipping_address = forms.CharField(required=False)
@@ -33,7 +33,7 @@ class CheckoutForm(forms.Form):
     set_default_billing = forms.BooleanField(required=False)
     use_default_billing = forms.BooleanField(required=False)
     
-    payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
+    #payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
 
 class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)

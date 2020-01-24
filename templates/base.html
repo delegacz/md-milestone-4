@@ -17,7 +17,7 @@
   <link href="{% static 'css/custom-style.css'%}" rel="stylesheet">
 </head>
 
-{% include "navbar.html" %}
+{% include "elements/navbar.html" %}
 
 <body>
 
@@ -40,8 +40,8 @@
     {% block extra_body %}
     {% endblock %}
 
-    {% include "footer.html" %}
-    {% include "scripts.html" %}
+    {% include "elements/footer.html" %}
+    {% include "elements/scripts.html" %}
 
     {% block extra_scripts %}
     {% endblock extra_scripts %}

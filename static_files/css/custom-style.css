@@ -82,10 +82,49 @@ form .nav-link {
     border-radius: 5px;
     margin-left: 15px;
 }
+/*Product Grid ----------------------------------------*/
+.pagination .page-item.active .page-link {
+    background-color: var(--brand-passive-color);
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
+.page-item.disabled {
+    font-size: 1.2rem;
+    margin: 0 10px;
+}
 /*Footer ----------------------------------------------*/
 .page-footer {
     background-color: var(--brand-passive-color);
     color: #fff;
+    padding: 30px 0px;
+}
+.footer-nav {
+    flex-direction: row;
+}
+.footer-nav li {
+    margin-right: 15px;
+}
+.footer-nav a {
+    color: #fff;
+}
+@media screen and (max-width: 767px) {
+    .footer-nav {
+            flex-direction: column;
+            margin: 20px 0 20px 0;
+    }
+    #product-filter-from {
+        padding: 20px 0;
+    }
+    #div_id_title,
+    #div_id_category,
+    #div_id_category div {
+        width: 100%;
+    }
+    #div_id_category,
+    .product-filter input[type=submit]  {
+        margin-left: 0;
+
+    }
 }
 /*Stripe Default Styling ------------------------------*/
 #stripeBtnLabel {
