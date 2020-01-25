@@ -3,10 +3,12 @@
     --brand-active-color: #FFD600;
     --sale-color: #ff0020;
     --lime-special-color: #70FF00;
+    --kupa: red;
 }
 .card {
     text-align: left;
 }
+
 .category-name {
     font-size: 10px;
 }

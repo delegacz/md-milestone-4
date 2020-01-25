@@ -58,6 +58,8 @@ This website fulfills the need of users to discover and purchase products by pro
     - The project uses **Crispy Forms** to simplify styling of django generated forms
 - [django countries](https://pypi.org/project/django-countries/)
     - The project uses **Django Countries** to provice Country choice field in the forms
+- [django filter](https://django-filter.readthedocs.io/en/master/guide/usage.html)
+    - The project uses **Django Filter** to provice search and pagination functionality
 - [Pillow](https://pillow.readthedocs.io/en/stable/)
     - The project uses **Pillow** as python Imaging Library
 - [Bootstrap](https://getbootstrap.com/)
@@ -76,24 +78,50 @@ This website fulfills the need of users to discover and purchase products by pro
     - The project uses **Travis CI** for continuous integration
 
 ## Testing
+Unit tests were written form models, views and froms and can be accesed in `ecommerce/test.py` and can be run in console by using `python manage.py test`. 
+- Model Tests - Checks that models given data, calculate and output it properly
+- View Testing - Checks if view given data output to correct template and request comes back with status 200,. Some view could not be tested as I couldnt figure out how to test views that are calling other methods for values
+- Form Validity Testing - Checks if forms are valid, the checkout form could not tested as I could not figure out how to test CountryField provided by django countries
+### Front-end Testing
 
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+Website was tested on multipule brosers(Firefox, Chrome, Opera, Safari) and divices(Iphone X, Iphone Xr) in order to tests mobile responsivity and if all CSS and JavaScript function properly, One issue was found. See Below in **Issues Found**
+### Travis CI
+Project uses Tavis CI for Build Testing per Commit
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
+Travis Setup Process:
+##### 
+##### Setting up Envirement Virables for Travis CI
+- Virables are added in project configuration tab `More Options > Settings`
+- SECRET_KEY had to be encrypted following these steps in command line:
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
+`travis login --pro`
 
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
+`travis encrypt SOMEVAR="secretvalue" --add`
 
-In addition, you should mention in this section how your project loo ks and works on different browsers and screen sizes.
+### Code Validation
+Code was validated using followig:
+ - [W3 HTML Validator](https://validator.w3.org) - HTML Validation
+ - [W3 CSS Validator](https://jigsaw.w3.org/css-validator/) - CSS Validation
+ - [JS Hint](https://jshint.com) - JavaScript Validation
+### Issues Found
+1.
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+In Safari CSS `background-image: url();` does not display a background image when image is not saved properly. For example `.jpg` will not work if these creteria are not met:
+- progressive encoding is used
+- the image is a background (for an element or the whole page)
+- the image is too large (exact threshold unknown)
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+and  `.webp` seem not to be supported
+
+To fix this issue image have to be resaved for example by using Photoshop
+
+[StackOverflow Thread Source](https://stackoverflow.com/questions/17341728/background-image-not-showing-in-safari)
+
+2.
+
+After implemeting `django-filter` to introduce search functionality my pagination on `homeview` dissapeared.
+
+That was resolved by rewriting `homeview` code to work with `django-filter`
 
 ## Deployment
 This project was developed using [Miscrosoft Visual Studio Code](https://code.visualstudio.com/).
@@ -111,12 +139,13 @@ Once code was functional it was deployed to [Heroku](https://www.heroku.com/)
 7. Deploy the repository:<br>`git add .`<br>`git commit -am "message"`<br>`git push heroku master`
 
 ## Resources Used 
-- Free code Academy django tutorial
-- Stack overflow threads
-- Django Documentation
-- django filter documentation
-- md5 template
-- 
+- [FreeCodeComp django tutorial](https://www.youtube.com/watch?v=YZvRrldjf1Y&)
+- [StackOverflow Threads 1](https://stackoverflow.com/questions/17341728/background-image-not-showing-in-safari)
+- [StackOverflow Threads 2](https://stackoverflow.com/questions/44048156/django-filter-use-paginations)
+- [Django Documentation](https://docs.djangoproject.com/en/3.0/)
+- [django filter documentation](https://django-filter.readthedocs.io/en/master/guide/usage.html)
+- [MDB Bootstrap Template](https://mdbootstrap.com/)
+- [Travis CI](https://docs.travis-ci.com/)
 
 ## Credits
 
@@ -127,23 +156,3 @@ Once code was functional it was deployed to [Heroku](https://www.heroku.com/)
 - All the product photos are from nike.com and are used for educational purposes only, Nike and Nike Swoosh are registered trademaks belonging to Nike
 
 ### Acknowledgements
-
-- I received inspiration for this project from X
-
-
-
-
-
-
-
-
-Used code
-- [AllAuth](https://django-allauth.readthedocs.io/en/latest/installation.html)
-- [Template](https://mdbootstrap.com/freebies/jquery/e-commerce/)
-App description
-- [Crispy Forms](#)
-- [django countries](#)
-- [bootstrap4](#)
-- [Pillow](#)
-main - project configuration
-ecommerce - products managment

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block head_title %}STR:WER Checkout{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -108,18 +109,6 @@
                 <label class="custom-control-label" for="use_default_billing">Use default billing address: {{ default_billing_address.street_address|truncatechars:10 }}</label>
               </div>
               {% endif %}
-              <hr>
-
-              <h3>Payment option</h3>
-
-              <div class="d-block my-3">
-                {% for value, name in form.fields.payment_option.choices %}
-                <div class="custom-control custom-radio">
-                  <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
-                  <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
-                </div>
-                {% endfor %}
-              </div>
 
               <hr class="mb-4">
               <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
@@ -140,24 +129,3 @@
   </main>
 
 {% endblock content %}
-
-{% block extra_scripts %}
-<script>
-
-var hideable_shipping_form = $('.hideable_shipping_form');
-var hideable_billing_form = $('.hideable_billing_form');
-
-var use_default_shipping = document.querySelector("#same_billing_address");
-console.log(use_default_shipping);
-
-
-use_default_shipping.addEventListener('change', function() {
-   if (this.checked) {
-    hideable_billing_form.hide();
-  } else {
-    hideable_billing_form.show();
-  }
-})
-
-</script>
-{% endblock extra_scripts %}
