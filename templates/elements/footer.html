@@ -7,13 +7,13 @@
     <div class="col-md-4 col-sm-12">
       <ul class="navbar-nav footer-nav nav-flex-icons">
         <li class="nav-item">
-          <a href="pages/privacy-policy" class="nav-link waves-effect">Privacy Policy</a>
+          <a href="{% url 'privacy-policy' %}" class="nav-link waves-effect">Privacy Policy</a>
         </li>
          <li class="nav-item">
-          <a href="pages/refund-policy" class="nav-link waves-effect">Refund Policy</a>
+          <a href="{% url 'refund-policy' %}" class="nav-link waves-effect">Refund Policy</a>
         </li>
         <li class="nav-item">
-          <a href="pages/terms-and-conditions" class="nav-link waves-effect">Terms & Conditions</a>
+          <a href="{% url 'terms-and-conditions' %}" class="nav-link waves-effect">Terms & Conditions</a>
         </li>
         <li class="nav-item">
           <a href="{% url 'ecommerce:request-refund' %}" class="nav-link waves-effect">Request a Refund</a>

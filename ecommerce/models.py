@@ -40,6 +40,8 @@ class Item(models.Model):
     label = models.CharField(choices=LABEL_CHOICES, max_length=1)
     slug = models.SlugField()
     description = models.TextField()
+
+
     image = models.ImageField()
 
     def __str__(self):
@@ -60,6 +62,18 @@ class Item(models.Model):
             'slug': self.slug
         })
 
+class ProductReview(models.Model):
+    item = models.ForeignKey(Item ,on_delete=models.CASCADE, related_name='reviews')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return 'Review {} by {}'.format(self.body, self.name)
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,

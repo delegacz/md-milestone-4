@@ -8,7 +8,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
-from .forms import CheckoutForm, CouponForm, PaymentForm
+from .forms import CheckoutForm, CouponForm, PaymentForm, ProductReviewForm
 from .models import Item, OrderItem, Order, Address, Payment, UserProfile
 from coupons.models import Coupon
 from refunds.models import Refund
@@ -342,8 +342,6 @@ class PaymentView(View):
         messages.warning(self.request, "Invalid data received")
         return redirect("/payment/stripe/")
 
-
-
 def product_grid_view(request):
 
     item_list = Item.objects.all().order_by('id')
@@ -384,6 +382,28 @@ class OrderSummaryView(LoginRequiredMixin, View):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product.html" 
+   
+def product_detail_view(request, slug):
+    template_name = "product.html"
+    item = get_object_or_404(Item, slug=slug)
+    reviews = item.reviews.order_by('created_on')
+    new_review = None
+
+    if request.method == 'POST':
+        review_form = ProductReviewForm(data=request.POST)
+        if review_form.is_valid():
+            new_review = review_form.save(commit=False)
+            new_review.item = item
+            new_review.save()
+    else:
+        review_form = ProductReviewForm()
+
+    return render(request, template_name, {
+        'item':item,
+        'reviews':reviews,
+        'new_review':new_review,
+        'review_form':review_form
+    })
 
 @login_required
 def add_to_cart(request, slug):

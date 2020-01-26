@@ -3,41 +3,40 @@
 
 [Visit Live Project](https://md-milestone-project-4.herokuapp.com/)
 
-STR:WER is a ecommerce shop for all things street wear, manualy picked inventory of the most desirables items from the world of street wear. 
+STR:WER is an e-commerce shop for all things streetwear, manually picked inventory of the most desirables items from the world of streetwear. 
 
 Use code: 123ABC for 100$ OFF
  
 ## UX
 ### Who is this website for?
-This website is aimed at people who are interested in a street wear culture and would like to purchase clouthing articles(Sneakers, and Outdoor/Outer Cloathing)
+This website is aimed at people who are interested in streetwear culture and would like to purchase clothing articles(Sneakers, and Outdoor/Outer Clothing)
 
 ### What does it fulfill?
 This website fulfills the need of users to discover and purchase products by providing a range of products and an ability to order and pay for them
 
 ### User Stories 
 
-- As a user , I want add product to the cart , so that I can purchase it.
-- As a user, I want to fill an refund form, so that I can revice refund for returned product
+- As a user, I want to add a product to the cart, so that I can purchase it.
+- As a user, I want to fill a refund form, so that I can receive a refund for the returned product
 - As a user, I want to sing up, so that I can make a purchase
-- As a user, I want to search through products, so that I cant find a jacket I want
-
+- As a user, I want to search through products, so that I can't find a jacket I want
 
 ## Features
 
  
 ### Existing Features
-- Refunds - allows customer to request a refund by providing ref code and submitting a form
-- Coupon Codes  - allows users to lower the price of the order by using code at checkout
-- Pagination - allows user to browse through products by changing displayed page
-- Add to Cart - Allows users to add an item to the cart for later checkout, cart page also gives user an opportunity to modify quantity of the product or remove it before progressing to checkout
-- Stripe Integration - Allows users to pay for thier order using Stripe
-- Order Summary - Allows users to see an detailed view at thier order on checkout page and apply coupon code for a discount 
+- Refunds - allows the customer to request a refund by providing ref code and submitting a form
+- Coupon Codes - allows users to lower the price of the order by using code at checkout
+- Pagination - allows user to browse through products by changing the displayed page
+- Add to Cart - Allows users to add an item to the cart for later checkout, cart page also allows the user to modify the quantity of the product or remove it before progressing to checkout
+- Stripe Integration - Allows users to pay for their order using Stripe
+- Order Summary - Allows users to see a detailed view at their order on the checkout page and apply coupon code for a discount
 
 
 ### Features Left to Implement
 - Size Selector
 - Gender Selector
-- More product Categories
+- More product categories
 - Product Reviews
 - Advanced product Gallery
 
@@ -47,29 +46,29 @@ This website fulfills the need of users to discover and purchase products by pro
 - [JQuery](https://jquery.com)
     - The project uses **JQuery** to simplify DOM manipulation.
 - [Stripe](https://stripe.com/)
-    - The project uses **Stripe** for credit/debit cart processing and payment gateway
+    - The project uses **Stripe** for credit/debit card processing and payment gateway
 - [Django](https://www.djangoproject.com/)
     - The project uses **Django** as python web framework
 - [Python](https://www.python.org/)
-    - The project uses **Python** as a main programic language
+    - The project uses **Python** as the main programming language
 - [AllAuth](https://django-allauth.readthedocs.io/en/latest/installation.html)
-    - The project uses **AllAuth** to provide ability to Sign in/ Log In for users
+    -The project uses **AllAuth** to provide the ability to Sign in/Login for users
 - [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-    - The project uses **Crispy Forms** to simplify styling of django generated forms
+    - The project uses **Crispy Forms** to simplify styling of Django generated forms
 - [django countries](https://pypi.org/project/django-countries/)
-    - The project uses **Django Countries** to provice Country choice field in the forms
+    - The project uses **Django Countries** to provide a Country choice field in the forms
 - [django filter](https://django-filter.readthedocs.io/en/master/guide/usage.html)
-    - The project uses **Django Filter** to provice search and pagination functionality
+    - The project uses **Django Filter** to provide search and pagination functionality
 - [Pillow](https://pillow.readthedocs.io/en/stable/)
     - The project uses **Pillow** as python Imaging Library
 - [Bootstrap](https://getbootstrap.com/)
-    - The project uses **Bootstrap** to simplify and streamline template creation process
+    - The project uses **Bootstrap** to simplify and streamline the templates creation process
 - [JavaScript](https://www.javascript.com/)
     - The project uses **JavaScript** for DOM manipulation and Stripe integration
 - [Git](https://git-scm.com)
-    - The project uses **GIT** for version controll and backup
+    - The project uses **GIT** for version control and backup
 - [GitHub](https://github.com)
-    - The project uses **Github** for remote repository storage and commit log
+    - The project uses **Github** for remote repository storage and commits log
 - [Heroku](https://www.heroku.com/home)
     - The project uses **Heroku** as a deployment platform and hosting
 - [Amazon Web Services - AWS](https://aws.amazon.com)
@@ -78,21 +77,21 @@ This website fulfills the need of users to discover and purchase products by pro
     - The project uses **Travis CI** for continuous integration
 
 ## Testing
-Unit tests were written form models, views and froms and can be accesed in `ecommerce/test.py` and can be run in console by using `python manage.py test`. 
+Unit tests were written form models, views and forms and can be accessed in `ecommerce/test.py` and can be run in the console by using `python manage.py test`. 
 - Model Tests - Checks that models given data, calculate and output it properly
-- View Testing - Checks if view given data output to correct template and request comes back with status 200,. Some view could not be tested as I couldnt figure out how to test views that are calling other methods for values
-- Form Validity Testing - Checks if forms are valid, the checkout form could not tested as I could not figure out how to test CountryField provided by django countries
-### Front-end Testing
+- View Testing - Checks if view given data output to correct template and request comes back with status 200. Some view could not be tested as I couldn't figure out how to test views that are calling other methods for values
+- Form Validity Testing - Checks if forms are valid, the checkout form could not be tested as I could not figure out how to test CountryField provided by Django countries
 
-Website was tested on multipule brosers(Firefox, Chrome, Opera, Safari) and divices(Iphone X, Iphone Xr) in order to tests mobile responsivity and if all CSS and JavaScript function properly, One issue was found. See Below in **Issues Found**
+### Front-end Testing
+This project was developed in Desktop First mindset - The website was tested on multiple browsers(Firefox, Chrome, Opera, Safari) and devices(iPhone X, iPhone Xr) to tests mobile responsivity and if all CSS and JavaScript function properly, One issue was found. See Below in **Issues Found**
 ### Travis CI
-Project uses Tavis CI for Build Testing per Commit
+The project uses Tavis CI for Build Testing per Commit
 
 Travis Setup Process:
 ##### 
 ##### Setting up Envirement Virables for Travis CI
-- Virables are added in project configuration tab `More Options > Settings`
-- SECRET_KEY had to be encrypted following these steps in command line:
+- Variables are added in project configuration tab `More Options > Settings`
+- SECRET_KEY had to be encrypted following these steps in the command line:
 
 `travis login --pro`
 
@@ -106,7 +105,7 @@ Code was validated using followig:
 ### Issues Found
 1.
 
-In Safari CSS `background-image: url();` does not display a background image when image is not saved properly. For example `.jpg` will not work if these creteria are not met:
+In Safari CSS `background-image: url();` does not display a background image when the image is not saved properly. For example `.jpg` will not work if these criteria are not met:
 - progressive encoding is used
 - the image is a background (for an element or the whole page)
 - the image is too large (exact threshold unknown)
@@ -153,6 +152,6 @@ Once code was functional it was deployed to [Heroku](https://www.heroku.com/)
 - All products, Images, Product description are from [Nike Store](https://www.nike.com)
 
 ### Media
-- All the product photos are from nike.com and are used for educational purposes only, Nike and Nike Swoosh are registered trademaks belonging to Nike
+- All the product photos are from nike.com and are used for educational purposes only. Nike and Nike Swoosh are registered trademarks belonging to Nike
 
 ### Acknowledgements
