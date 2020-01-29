@@ -108,25 +108,6 @@ form .nav-link {
 .footer-nav a {
     color: #fff;
 }
-@media screen and (max-width: 767px) {
-    .footer-nav {
-            flex-direction: column;
-            margin: 20px 0 20px 0;
-    }
-    #product-filter-from {
-        padding: 20px 0;
-    }
-    #div_id_title,
-    #div_id_category,
-    #div_id_category div {
-        width: 100%;
-    }
-    #div_id_category,
-    .product-filter input[type=submit]  {
-        margin-left: 0;
-
-    }
-}
 /*Stripe Default Styling ------------------------------*/
 #stripeBtnLabel {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
@@ -220,4 +201,23 @@ form .nav-link {
   .current-card-form {
     display: none;
   }
-  
+  /*Mobile Respo-----------------------------------------------------------------*/
+  @media screen and (max-width: 767px) {
+    .footer-nav {
+            flex-direction: column;
+            margin: 20px 0 20px 0;
+    }
+    #product-filter-from {
+        padding: 20px 0;
+    }
+    #div_id_title,
+    #div_id_category,
+    #div_id_category div {
+        width: 100%;
+    }
+    #div_id_category,
+    .product-filter input[type=submit]  {
+        margin-left: 0;
+
+    }
+}

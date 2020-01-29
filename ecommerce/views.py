@@ -191,16 +191,8 @@ class CheckoutView(View):
                         messages.info(
                             self.request, "Please fill in the required billing address fields")
 
-                #payment_option = form.cleaned_data.get('payment_option')
                 return redirect('ecommerce:payment', payment_option='stripe')
-                #if payment_option == 'S':
-                 #   return redirect('ecommerce:payment', payment_option='stripe')
-                #elif payment_option == 'P':
-                #    return redirect('ecommerce:payment', payment_option='paypal')
-                #else:
-                #    messages.warning(
-                #        self.request, "Invalid payment option selected")
-                #    return redirect('ecommerce:checkout')
+               
         except ObjectDoesNotExist:
             messages.warning(self.request, "You do not have an active order")
             return redirect("ecommerce:order-summary")

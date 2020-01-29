@@ -5,9 +5,11 @@
 
 STR:WER is an e-commerce shop for all things streetwear, manually picked inventory of the most desirables items from the world of streetwear. 
 
-Use code: 123ABC for 100$ OFF
+Use code: 123ABC for 20 EURO OFF
  
 ## UX
+[Wireframe Figma link](https://www.figma.com/proto/uAMIGE0TGB2uONuI1yjFCM/md-miestone-4?node-id=3%3A2&viewport=407%2C404%2C0.26897957921028137&scaling=min-zoom)
+
 ### Who is this website for?
 This website is aimed at people who are interested in streetwear culture and would like to purchase clothing articles(Sneakers, and Outdoor/Outer Clothing)
 
@@ -18,8 +20,8 @@ This website fulfills the need of users to discover and purchase products by pro
 
 - As a user, I want to add a product to the cart, so that I can purchase it.
 - As a user, I want to fill a refund form, so that I can receive a refund for the returned product
-- As a user, I want to sing up, so that I can make a purchase
-- As a user, I want to search through products, so that I can't find a jacket I want
+- As a user, I want to sign up, so that I can make a purchase
+- As a user, I want to search through products, so that I can find a jacket I want
 
 ## Features
 
@@ -77,7 +79,7 @@ This website fulfills the need of users to discover and purchase products by pro
     - The project uses **Travis CI** for continuous integration
 
 ## Testing
-Unit tests were written form models, views and forms and can be accessed in `ecommerce/test.py` and can be run in the console by using `python manage.py test`. 
+My tests focus on the business logic and presentation rather than testing Django itself. Unit tests were written form models, views and forms and can be accessed in `ecommerce/test.py` and can be run in the console by using `python manage.py test`. 
 - Model Tests - Checks that models given data, calculate and output it properly
 - View Testing - Checks if view given data output to correct template and request comes back with status 200. Some view could not be tested as I couldn't figure out how to test views that are calling other methods for values
 - Form Validity Testing - Checks if forms are valid, the checkout form could not be tested as I could not figure out how to test CountryField provided by Django countries

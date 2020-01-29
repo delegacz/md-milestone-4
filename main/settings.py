@@ -1,6 +1,5 @@
 import os
 import os.path
-#import env
 import sys
 import dj_database_url
 

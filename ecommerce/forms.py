@@ -4,20 +4,15 @@ from django_countries.widgets import CountrySelectWidget
 from .models import ProductReview
 from coupons.forms import CouponForm
 from refunds.forms import RefundForm
-#PAYMENT_CHOICES = (
-#    ('S', 'Stripe'),
-#    ('P', 'PayPal')
-#)
-
 class CheckoutForm(forms.Form):
-    shipping_address = forms.CharField(required=False)
+    shipping_address = forms.CharField(required=True)
     shipping_address2 = forms.CharField(required=False)
     shipping_country = CountryField(blank_label='(select country)').formfield(
-        required=False,
+        required=True,
         widget=CountrySelectWidget(attrs={
             'class': 'custom-select d-block w-100',
         }))
-    shipping_zip = forms.CharField(required=False)
+    shipping_zip = forms.CharField(label='Enter ZIP code', required=True, widget=forms.TextInput(attrs={'placeholder':'dupa','required':'true'}))
 
     billing_address = forms.CharField(required=False)
     billing_address2 = forms.CharField(required=False)
@@ -34,8 +29,6 @@ class CheckoutForm(forms.Form):
     set_default_billing = forms.BooleanField(required=False)
     use_default_billing = forms.BooleanField(required=False)
     
-    #payment_option = forms.ChoiceField(widget=forms.RadioSelect, choices=PAYMENT_CHOICES)
-
 class PaymentForm(forms.Form):
     stripeToken = forms.CharField(required=False)
     save = forms.BooleanField(required=False)
