@@ -78,6 +78,10 @@ This website fulfills the need of users to discover and purchase products by pro
 - [Travis CI](https://travis-ci.org)
     - The project uses **Travis CI** for continuous integration
 
+- [WhiteNoise](http://whitenoise.evans.io/en/stable/) 
+    - The projecy uses **WhiteNoice** for
+    static file managment while deployed
+
 ## Testing
 My tests focus on the business logic and presentation rather than testing Django itself. Unit tests were written form models, views and forms and can be accessed in `ecommerce/test.py` and can be run in the console by using `python manage.py test`. 
 - Model Tests - Checks that models given data, calculate and output it properly
