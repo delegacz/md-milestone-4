@@ -40,4 +40,5 @@ sqlparse==0.3.0
 stripe==2.41.1
 typed-ast==1.4.0
 urllib3==1.25.7
+whitenoise==5.0.1
 wrapt==1.11.2
